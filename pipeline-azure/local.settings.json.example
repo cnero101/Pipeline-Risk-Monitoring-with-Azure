@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "EVENT_HUB_CONN_STR": "Endpoint=sb://<your-namespace>.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=<your-key>",
+    "STORAGE_CONN_STR": "DefaultEndpointsProtocol=https;AccountName=<your-storage-account>;AccountKey=<your-key>;EndpointSuffix=core.windows.net",
+    "LOGIC_APP_URL": "https://prod-<region>.logic.azure.com:443/workflows/<id>/triggers/manual/paths/invoke?..."
+  }
+}
