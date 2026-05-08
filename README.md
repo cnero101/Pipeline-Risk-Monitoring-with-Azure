@@ -40,18 +40,24 @@ year/month/day/            5 min cooldown
         ▼
 Streamlit Dashboard (localhost:8501)
 Auto-refresh every 30 seconds
+
+> Note: This project uses the native Azure Event Hubs SDK. Kafka surface support is not required for this implementation.
+
 ```
 
-### Azure Services Used
+## Azure Architecture Components / Azure Services Used
 
-| Service | Purpose |
-|---|---|
-| Azure Event Hubs (Basic) | Real-time sensor stream ingestion |
-| Azure Functions (Flex Consumption) | Serverless ML inference — Linux, Python 3.11 |
-| Azure Data Lake Storage Gen2 | Parquet file storage, partitioned by pipe/date |
-| Azure Blob Storage | Stores trained Random Forest model |
-| Azure Logic Apps | HTTP trigger → Gmail → HTML email alert |
+| Layer | Azure Service | Purpose |
+|---|---|---|
+| Sensor Simulation | Python Simulator | Generates simulated pipeline telemetry |
+| Streaming | Azure Event Hubs (Basic) | Ingests real-time sensor data |
+| Processing | Azure Functions (Flex Consumption) | Processes events and classifies anomalies (Serverless ML inference - Linux, Python 3.11) |
+| Storage | Azure Data Lake Storage Gen2 | Stores processed outputs in Parquet format, -partitioned by pipe/date |
+| Storage | Azure Blob Storage | Stores trained ML model (Random Forest model) |
+| Alerting | Azure Logic Apps | Sends email alerts for anomaly or critical events (HTTP trigger → Gmail → HTML email alert) |
 | Azure Monitor / App Insights | Function invocation monitoring |
+| Dashboard | Streamlit | Visualizes pipeline status and sensor trends |
+| ML Model | scikit-learn Random Forest | Classifies Normal, Anomaly, and Critical events |
 
 ---
 
@@ -121,8 +127,6 @@ python sensorsim_azure.py
 ```
 
 ### 6. Run the dashboard
-
-![Dashboard Screenshot](docs/dashboard_screenshot.png)
 
 ```bash
 streamlit run dashboard_azure.py
@@ -201,7 +205,7 @@ See [`docs/architecture.md`](docs/architecture.md) for full step-by-step setup i
 
 ## Cost
 
-This project runs entirely within the **Azure for Students free tier**:
+This project is designed to run within Azure for Students with careful usage, small workloads, and cleanup of unused resources:
 
 | Service | Free Limit | Project Usage |
 |---|---|---|
@@ -222,6 +226,22 @@ This project runs entirely within the **Azure for Students free tier**:
 - **pandas + pyarrow** — Parquet file handling
 - **streamlit + plotly** — dashboard
 - **streamlit-autorefresh** — 30-second auto-refresh
+
+---
+
+## Screenshots
+
+### Azure Architecture
+![Azure Architecture](docs/images/azure_architecture.png)
+
+### Streamlit Dashboard
+![Streamlit Dashboard](docs/images/streamlit_dashboard.png)
+
+### Email Alert
+![Email Alert](docs/images/logic_app_email_alert.png)
+
+### Blob Storage Output
+![Blob Storage Output](docs/images/blob_storage_output.png)
 
 ---
 
