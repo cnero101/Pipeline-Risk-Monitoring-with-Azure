@@ -19,7 +19,7 @@ A live Streamlit dashboard displays pipeline status cards, risk distribution, an
 
 ## Architecture
 
-```
+```text
 Sensor Simulator (sensorsim_azure.py)
         │
         │  azure-eventhub SDK
@@ -88,7 +88,7 @@ pipeline-risk-azure/
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/<your-username>/pipeline-risk-azure.git
+git clone https://github.com/cnero101/Pipeline-Risk-Monitoring-with-Azure.git
 cd pipeline-risk-azure
 ```
 
@@ -121,6 +121,8 @@ python sensorsim_azure.py
 ```
 
 ### 6. Run the dashboard
+
+![Dashboard Screenshot](docs/dashboard_screenshot.png)
 
 ```bash
 streamlit run dashboard_azure.py
@@ -161,7 +163,7 @@ Alerts are sent via Azure Logic Apps + Gmail connector when the ML model detects
 
 ## Dashboard Features
 
-- Pipeline status cards (one per pipeline — color coded green/orange/red)
+- Pipeline status cards (one per pipeline — colour-coded green/orange/red)
 - KPI row: total records, pipes monitored, Normal / Anomaly / Critical counts
 - Risk distribution donut chart
 - Risk events over time scatter plot
@@ -220,13 +222,6 @@ This project runs entirely within the **Azure for Students free tier**:
 - **pandas + pyarrow** — Parquet file handling
 - **streamlit + plotly** — dashboard
 - **streamlit-autorefresh** — 30-second auto-refresh
-
----
-
-## Course
-
-**DATA 608 — Big Data & Cloud Computing**
-University of Calgary | 2026
 
 ---
 
