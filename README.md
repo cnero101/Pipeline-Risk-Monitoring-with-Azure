@@ -5,6 +5,8 @@
 ![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat&logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
+![ML](https://img.shields.io/badge/ML-Scikit--Learn-green?logo=scikit-learn)
+![Status](https://img.shields.io/badge/Status-In%20Progress-orange)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
 
 ---
@@ -14,6 +16,28 @@
 This project streams sensor telemetry from 5 simulated Alberta pipelines into Azure Event Hubs, processes each reading through a trained Random Forest ML model using an Azure Function, stores results as Parquet files in Azure Data Lake Storage Gen2, and sends HTML email alerts via Azure Logic Apps + Gmail when anomalies or critical conditions are detected.
 
 A live Streamlit dashboard displays pipeline status cards, risk distribution, and sensor trends — refreshing automatically every 30 seconds.
+
+---
+
+## End-to-End Pipeline Flow
+
+1. Python simulator generates pipeline telemetry data
+2. Azure Event Hubs ingests streaming sensor events
+3. Azure Functions processes events in real time
+4. ML/rule-based logic classifies Normal, Anomaly, or Critical conditions
+5. Processed results are stored in Azure Blob Storage / ADLS Gen2
+6. Logic Apps sends alert notifications
+7. Streamlit dashboard visualizes live pipeline status
+
+---
+
+## Current Status
+
+✅ Azure Event Hubs configured  
+✅ Sensor simulator connected  
+✅ Azure Functions processing events  
+🔄 Streamlit dashboard integration in progress  
+🔄 Logic Apps email alert integration in progress  
 
 ---
 
@@ -39,23 +63,23 @@ year/month/day/            5 min cooldown
         │
         ▼
 Streamlit Dashboard (localhost:8501)
+...
 Auto-refresh every 30 seconds
-
+```
 > Note: This project uses the native Azure Event Hubs SDK. Kafka surface support is not required for this implementation.
 
-```
 
 ## Azure Architecture Components / Azure Services Used
 
 | Layer | Azure Service | Purpose |
 |---|---|---|
 | Sensor Simulation | Python Simulator | Generates simulated pipeline telemetry |
-| Streaming | Azure Event Hubs (Basic) | Ingests real-time sensor data |
-| Processing | Azure Functions (Flex Consumption) | Processes events and classifies anomalies (Serverless ML inference - Linux, Python 3.11) |
+| Streaming | Azure Event Hubs (Basic) | Receives/Ingests real-time sensor data |
+| Processing | Azure Functions (Flex Consumption) | Processes events, classifies and detects anomalies (Serverless ML inference - Linux, Python 3.11) |
 | Storage | Azure Data Lake Storage Gen2 | Stores processed outputs in Parquet format, -partitioned by pipe/date |
 | Storage | Azure Blob Storage | Stores trained ML model (Random Forest model) |
 | Alerting | Azure Logic Apps | Sends email alerts for anomaly or critical events (HTTP trigger → Gmail → HTML email alert) |
-| Azure Monitor / App Insights | Function invocation monitoring |
+| Monitoring | Azure Monitor / App Insights | Function invocation monitoring |
 | Dashboard | Streamlit | Visualizes pipeline status and sensor trends |
 | ML Model | scikit-learn Random Forest | Classifies Normal, Anomaly, and Critical events |
 
