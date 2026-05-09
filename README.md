@@ -269,6 +269,16 @@ This project is designed to run within Azure for Students with careful usage, sm
 
 ---
 
+## Future Improvements
+
+- Real IoT sensor integration
+- Computer vision monitoring using CCTV/drone feeds
+- Geospatial pipeline visualization
+- Multi-region deployment
+- Automated incident reporting
+
+---
+
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.
